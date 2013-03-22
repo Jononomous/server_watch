@@ -1,0 +1,2 @@
+class ServerLogsController < ApplicationController
+end
