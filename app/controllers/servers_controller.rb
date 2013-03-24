@@ -13,7 +13,7 @@ class ServersController < ApplicationController
       Net::SSH.start(server.url, server.username, keys: [server.key_file.path], keys_only: true) do |ssh|
         response = ssh.exec!("cat #{log.log_path}")
         ssh.exec!("cat /dev/null > #{log.log_path}")
-        parse_errors(response, server.id)
+        parse_errors(response, log.id)
         flash[:notice] = 'Log successfully parsed'
       end
     rescue
@@ -31,15 +31,9 @@ class ServersController < ApplicationController
         type = str.match(/\s\d{3}\s/).to_s.strip
         title = str.match(/\w+::\w+/).to_s
         level = 0
-        if ([type] & LogEvent::HIGHALERTS).present?
-          level = 3
-        end
-        if ([type] & LogEvent::MEDIUMALERTS).present?
-          level = 2
-        end
-        if ([type] & LogEvent::LOWALERTS).present?
-          level = 1
-        end
+        level = 3 if ([type] & LogEvent::HIGHALERTS).present?
+        level = 2 if ([type] & LogEvent::MEDIUMALERTS).present?
+        level = 1 if ([type] & LogEvent::LOWALERTS).present?
         if type != '200' && !type.match(/\d+/).nil?
           LogEvent.create(title: title, 
                           error_type: type, 
