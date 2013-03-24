@@ -58,16 +58,4 @@ class ServersController < ApplicationController
       end
     end
   end
-
-  def fetch_alerts
-    @servers.each do |s|
-      host = s.server_info.url
-      user = s.server_info.username
-      key = [s.server_info.ssh_key]
-      Net::SSH.start(host, user, key_data: key, keys_only: true) do |ssh|
-        response = ssh.exec!('cat')
-        return response
-      end
-    end
-  end
 end
