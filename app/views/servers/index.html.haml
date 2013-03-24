@@ -1,0 +1,20 @@
+.span11.offset4
+  %h3.well.well-small Server Activity
+  %table.table.table-striped
+    %thead
+      %th Server Name
+      %th Log
+      %th Alerts
+      %th Action
+    %tbody
+      - @servers.each do |log|
+        %tr
+          %td= log.server_info.name
+          %td= log.title
+          %td
+            %span.badge.badge-success= log.low_alerts.size
+            %span.badge.badge-warning= log.medium_alerts.size
+            %span.badge.badge-important= log.high_alerts.size
+          %td
+            = link_to 'View', server_log_path(log), class: 'btn'
+            = link_to 'Fetch', fetch_log_servers_path(server: log.server_info, log: log), class: 'btn'

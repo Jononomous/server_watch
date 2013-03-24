@@ -1,0 +1,19 @@
+.span4.offset4
+  = render partial: 'subnav'
+
+  %h3 New Server
+  = semantic_form_for @server_info, html: { multipart: true, class: 'block-form'}, url: server_infos_path do |form|
+    = form.input :name
+    = form.input :url
+    = form.input :username
+    = form.input :password
+    = form.file_field :key_file
+    .clearfix
+    %h4 Server Logs
+    #server_logs
+      = form.semantic_fields_for :server_logs do |log|
+        = render 'server_log_fields', f: log
+      .links
+        = link_to_add_association 'Add Log', form, :server_logs, class: 'btn'
+    = form.action :submit, button_html: { value: 'Create Server', class: 'btn btn-primary' }
+

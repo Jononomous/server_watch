@@ -1,0 +1,24 @@
+.span11.offset4
+  = render partial: 'subnav'
+
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Server Name
+        %th URL
+        %th Username
+        %th Password
+        %th EC2 Key
+        %th Actions
+    %tbody
+      - @server_info_list.each do |server|
+        %tr
+          %td= server.name
+          %td= server.url
+          %td= server.username
+          %td= server.password
+          %td= server.get_key
+          %td
+            .btn= link_to 'Edit', edit_server_info_path(server)
+            .btn= link_to 'View Logs', server_logs_path(specific: server)
+            .btn= link_to 'Delete', server_info_path(server), method: :delete, confirm: 'You Sure?'

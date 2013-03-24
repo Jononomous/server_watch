@@ -1,0 +1,24 @@
+.span11.offset4
+  %h3.well.well-small
+    = "#{@server_log.server_info.name}::#{@server_log.title}"
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Event
+        %th Type
+        %th Alert Level
+        %th Priority
+        %th Occured At
+    %tbody
+      - @log_events.each do |event|
+        %tr.primary{id: "log-#{event.id}"}
+          %td= event.title
+          %td= event.error_type
+          %td= event.alert_level
+          %td
+            %p{class: "badge badge-#{event.class_level}"}= event.priority?
+          %td= event.occured_at
+        .secondary{id: "sub-log-#{event.id}"}
+          %h4 Error Data 
+          %hr
+          %p= event.error_text

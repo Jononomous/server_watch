@@ -1,0 +1,3 @@
+%ul.nav.nav-pills
+  %li{class: is_active?('server_infos','index')}= link_to 'Servers List', server_infos_path
+  %li{class: is_active?('server_infos','new')}= link_to 'Add Server', new_server_info_path

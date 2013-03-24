@@ -3,8 +3,8 @@ class CreateLogEvents < ActiveRecord::Migration
     create_table :log_events do |t|
       t.string :title
       t.string :type
-      t.int :server_log_id
-      t.int :alert_level
+      t.integer :server_log_id
+      t.integer :alert_level
       t.datetime :occured_at
 
       t.timestamps

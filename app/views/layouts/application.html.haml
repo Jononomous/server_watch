@@ -6,6 +6,16 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
-    %p.notice= notice
-    %p.alert= alert
+    #header.container
+      .navbar.navbar-inverse.navbar-fixed-top
+        .navbar-inner
+          %a.brand ServerWatch
+          %ul.nav
+            %li.divider-vertical{class: is_active?('servers','index')}= link_to 'Home', servers_path 
+            %li.divider-vertical{class: is_active?('server_infos','index')}= link_to 'Servers', server_infos_path 
+    .container.span11.offset4 
+      -if notice
+        %p.alert= notice
+      -if alert
+        %p.alert= alert
     = yield

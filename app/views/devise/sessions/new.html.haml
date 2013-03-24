@@ -1,0 +1,11 @@
+.span6.offset4
+  %h2 Sign in
+  %hr
+  .block-form
+    = semantic_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = f.input :email
+      = f.input :password
+      = f.action :submit, button_html: { value: 'Sign in' }
+
+
+

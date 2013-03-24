@@ -1,0 +1,20 @@
+.span11.offset4
+  =# render partial: 'subnav'
+
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Server Name
+        %th Title
+        %th Path
+        %th Check Frequency
+        %th Action
+    %tbody
+      - @server_logs.each do |log|
+        %tr
+          %td= log.server_info.name
+          %td= log.title
+          %td= log.log_path
+          %td= log.chk_frequency
+          %td= link_to 'Edit', edit_server_info_path(log.server_info), class: 'btn' 
+

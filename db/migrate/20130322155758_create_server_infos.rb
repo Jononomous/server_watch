@@ -1,7 +1,7 @@
 class CreateServerInfos < ActiveRecord::Migration
   def change
     create_table :server_infos do |t|
-      t.int :user_id
+      t.integer :user_id
       t.string :name
       t.string :url
       t.string :username

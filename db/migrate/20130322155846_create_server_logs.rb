@@ -3,7 +3,7 @@ class CreateServerLogs < ActiveRecord::Migration
     create_table :server_logs do |t|
       t.string :title
       t.string :log_path
-      t.int :chk_frequency
+      t.integer :chk_frequency
 
       t.timestamps
     end

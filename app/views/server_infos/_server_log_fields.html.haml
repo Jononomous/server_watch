@@ -1,0 +1,5 @@
+.nested-fields
+  = f.input :title
+  = f.input :log_path
+  = f.input :chk_frequency, label: 'Check Frequency'
+  = link_to_remove_association 'Remove Log', f, class: 'btn btn-danger'
